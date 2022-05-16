@@ -32,7 +32,7 @@ export default function Home() {
           </a>
 
           <a
-            href="https://github.com/DeveloperTK/kit-cors-proxy/CODEOWNERS"
+            href="https://github.com/DeveloperTK/kit-cors-proxy/blob/main/CODEOWNERS"
             className={styles.card}
           >
             <h2>General Contact &rarr;</h2>

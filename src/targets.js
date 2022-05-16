@@ -1,7 +1,6 @@
-const M_KIT_EDU_BASE = "https://m.kit.edu"
-
 const Targets = {
-    SHUTTLE_URL: M_KIT_EDU_BASE + "/include/shuttle.json"
+    SHUTTLE_URL: "https://m.kit.edu/include/shuttle.json",
+    EVENTS_URL: "https://m.kit.edu/include/events.html"
 }
 
 export default Targets;
