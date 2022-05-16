@@ -1,5 +1,10 @@
-// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
+import { generateJsonResponse } from "../../src/fetch"
 
 export default function handler(req, res) {
-  res.status(200).json({ name: 'John Doe' })
+    res.status(200).json(generateJsonResponse(
+        false,
+        "/api/hello",
+        new Date().toUTCString(),
+        { message: 'Hello World!' }
+    ))
 }
