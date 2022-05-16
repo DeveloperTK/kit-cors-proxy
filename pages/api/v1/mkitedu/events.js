@@ -28,5 +28,5 @@ function eventsParser(htmlText) {
 }
 
 function parseImageSourceFromCss(css) {
-    return css.replace("url(\"", "").replace("\")", "")
+    return css.replace("url(\"", "").replace("url(", "").replace("\")", "").replace(")", "")
 }

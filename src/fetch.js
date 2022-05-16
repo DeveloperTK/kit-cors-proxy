@@ -39,7 +39,7 @@ export async function fetchData(url, options, resultModifier) {
 
     // return if request was already cached
     if (cachedResult && !options.ignoreCache) {
-        return generateJsonResponse(true, url, new Date().toISOString(), 200, cachedResult)
+        return generateJsonResponse(true, url, cachedResult.fetchTime, 200, cachedResult.content)
     }
 
     let request = await fetch(url, {
@@ -67,7 +67,10 @@ export async function fetchData(url, options, resultModifier) {
         console.warn("No result modifier was specified while handling URL " + url + ". Please specify one, even if it's empty!");
     }
 
-    cacheData.put(url, content, options.cacheDuration || DEFAULT_CACHE_DURATION)
+    cacheData.put(url, {
+        fetchTime: fetchDate,
+        content: content
+    }, options.cacheDuration || DEFAULT_CACHE_DURATION)
     
     return generateJsonResponse(false, url, fetchDate, request.status, content)
 }
