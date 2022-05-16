@@ -11,11 +11,12 @@ const DEFAULT_CACHE_DURATION = 120_000;
  * @param {*} data the actual response data
  * @returns consistent json object with all data
  */
-export function generateJsonResponse(isCached, originalURL, receivedAt, data) {
+export function generateJsonResponse(isCached, originalURL, receivedAt, status, data) {
     return {
         cached: isCached,
         origin: originalURL,
         received: receivedAt,
+        status: status,
         data: data
     }
 }
@@ -25,9 +26,10 @@ export function generateJsonResponse(isCached, originalURL, receivedAt, data) {
  * 
  * @param {*} url URL to fetch data from
  * @param {*} options fetch options
+ * @param {*} resultModifier transform the fetched data before caching
  * @returns fetched or cached data, see {@link generateJsonResponse}
  */
-export async function fetchData(url, options) {
+export async function fetchData(url, options, resultModifier) {
     let cachedResult = cacheData.get(url);
 
     if (!options) {
@@ -35,23 +37,39 @@ export async function fetchData(url, options) {
     }
 
     if (cachedResult && !options.ignoreCache) {
-        return generateJsonResponse(true, url, new Date().toISOString(), cachedResult)
+        return generateJsonResponse(true, url, new Date().toISOString(), 200, cachedResult)
     } else {
-        let request = fetch(url, {
+        let request = await fetch(url, {
             headers: {
-                'User-Agent': 'kit-cors-proxy/1 (i am a friendly bot, see github.com/kit-mobile/kit-cors-proxy)'
+                'User-Agent': 'kit-cors-proxy/1 (i am a friendly bot, see github.com/DeveloperTK/kit-cors-proxy)'
             }
         })
 
+        if (request.status >= 400) {
+            return generateJsonResponse(false, url, new Date().toISOString, request.status, {});
+        }
+
+        let fetchDate = new Date().toISOString();
         let content;
+
         if (options.json) {
-            content = await request.then(res => res.json())
+            content = await request.json()
         } else {
-            content = await request.then(res => res.text())
+            content = await request.text()
+        }
+
+        if (resultModifier) {
+            content = resultModifier(content)
+        } else {
+            console.warn("No result modifier was specified while handling URL " + url + ". Please specify one, even if it's empty!");
         }
 
         cacheData.put(url, content, options.cacheDuration || DEFAULT_CACHE_DURATION)
         
-        return generateJsonResponse(false, url, new Date().toISOString(), content)
+        return generateJsonResponse(false, url, fetchDate, request.status, content)
     }
+}
+
+export function emptyModifier(data) {
+    return data
 }
