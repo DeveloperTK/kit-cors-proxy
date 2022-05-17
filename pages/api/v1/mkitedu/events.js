@@ -17,7 +17,7 @@ function eventsParser(htmlText) {
     for (let article of fetchDom.window.document.getElementsByTagName('article')) {
         articles.push({
             name: article.querySelector('h3 a').textContent.trim(),
-            url: article.querySelector('h3 a').href,
+            url: article.querySelector('h3 a').href.replace("veranstaltungen.php", "veranstaltungskalender.php"),
             time: article.querySelector('.newsteaser span').textContent.trim(),
             description: article.querySelector('.newsteaser p').textContent.trim(),
             image: parseImageSourceFromCss(article.querySelector('.event_image').style.backgroundImage)
