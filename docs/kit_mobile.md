@@ -1,4 +1,4 @@
-# KIT Mobile Dokumentation
+# KIT Mobile Ideensamlung
 
 Informationen:
 - Hauptseite

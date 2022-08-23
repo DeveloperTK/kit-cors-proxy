@@ -66,7 +66,8 @@ export async function fetchData(url: string, options: FetchOptions, resultModifi
     let request = await fetch(url, {
         headers: {
             'User-Agent': userAgent,
-            'X-Forwarded-For': options.ignoreForwardHeader ? undefined : options.agent.ip
+            'X-Forwarded-For': options.ignoreForwardHeader ? undefined : options.agent.ip,
+            'X-Requested-From': options.ignoreForwardHeader ? undefined : options.agent.ip
         }
     })
 

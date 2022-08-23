@@ -8,6 +8,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@types/jsdom": "^20.0.0",
     "@ungap/structured-clone": "^1.0.1",
     "jsdom": "^19.0.0",
     "memory-cache": "^0.2.0",

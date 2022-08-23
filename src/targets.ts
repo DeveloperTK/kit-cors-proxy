@@ -4,7 +4,7 @@ const Targets = {
     APPOINTMENTS_URL: "https://m.kit.edu/include/appointments.json",
     NEWS_URL: "https://m.kit.edu/include/news.html",
     RAUMBUCHUNG_URL: "https://raumbuchung.bibliothek.kit.edu/day.php",
-    SITZPLATZRESERVIERUNG_URL: "https://raumbuchung.bibliothek.kit.edu/sitzplatzreservierung/day.php"
+    SEAT_DAY_URL: "https://raumbuchung.bibliothek.kit.edu/sitzplatzreservierung/day.php"
 }
 
 export default Targets;
