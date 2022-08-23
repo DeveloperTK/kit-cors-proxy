@@ -21,7 +21,7 @@ function newsParser(htmlText: string): object {
         article.querySelector('.newsteaser p a').innerHTML = "";
         articles.push({
             name: article.querySelector('h3 a').textContent.trim(),
-            url: article.querySelector('h3 a').href,
+            url: (article.querySelector('h3 a') as HTMLAnchorElement).href,
             description: article.querySelector('.newsteaser p').textContent.trim(),
         })
     }
