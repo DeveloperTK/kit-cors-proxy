@@ -1,16 +1,19 @@
-import Targets from "../../../../src/targets"
-import { fetchData } from "../../../../src/fetch"
+import Targets from "@/src/targets"
+import { fetchData, getAgent } from "@/src/fetch"
 import { JSDOM } from "jsdom";
+import { NextApiHandler, NextApiRequest, NextApiResponse } from "next";
 
-export default async function handler(req, res) {
+const handler: NextApiHandler = async (req: NextApiRequest, res: NextApiResponse) => {
     res.status(200).json(await fetchData(
         Targets.NEWS_URL,
-        { json: false },
-        eventsParser
+        { json: false, agent: getAgent(req) },
+        newsParser
     ))
 }
 
-function eventsParser(htmlText) {
+export default handler;
+
+function newsParser(htmlText: string): object {
     let fetchDom = new JSDOM(htmlText);
     let articles = [];
 
@@ -24,8 +27,4 @@ function eventsParser(htmlText) {
     }
 
     return articles;
-}
-
-function parseImageSourceFromCss(css) {
-    return css.replace("url(\"", "").replace("\")", "")
 }
