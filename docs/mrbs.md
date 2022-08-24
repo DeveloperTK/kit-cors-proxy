@@ -1,3 +1,16 @@
+# NEVERMIND DAS SYSTEM HAT EINE API
+
+Argh und ich parse mir hier irgendwelche HTML Seiten zusammen
+
+10 Stunden meines Lebens gewasted
+
+egal...
+
+    https://raumbuchung.bibliothek.kit.edu/sitzplatzreservierung_api/bookings.php?
+    start_time=2022-08-24T23:00:00+01:00&
+    end_time=2022-08-25T22:59:59+01:00&
+    locations=["A42","A34","A35","A40","A34","A44"]
+
 # Meeting Room Booking Service Dokumentation
 
 Tagesansicht: Beispiel **23.08.2022**
