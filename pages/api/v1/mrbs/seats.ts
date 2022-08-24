@@ -11,7 +11,7 @@ const handler: NextApiHandler = async (req: NextApiRequest, res: NextApiResponse
 
     res.status(200).json(await fetchData(
         Targets.SEAT_DAY_URL + `?year=${req.query.year}&month=${req.query.month}&day=${req.query.day}&area=${req.query.area}`,
-        { json: false, ignoreCache: true, agent: getAgent(req) },
+        { json: false, ignoreCache: false, cacheDuration: 60_000, agent: getAgent(req) },
         raumbuchungParser
     ))
 }
