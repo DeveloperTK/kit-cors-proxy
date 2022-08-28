@@ -18,7 +18,7 @@ const handler: NextApiHandler = async (req: NextApiRequest, res: NextApiResponse
 
 export default handler;
 
-function raumbuchungParser(htmlText: string): object {
+export function raumbuchungParser(htmlText: string): object {
     const fetchDom = new JSDOM(htmlText)
     const document = fetchDom.window.document
 
